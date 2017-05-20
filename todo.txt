@@ -1,0 +1,8 @@
+TODO:
+  validações
+  try cacth
+  teste automatizado
+  duplicar relação user friend (log efetivado)
+  numero status
+  tratar msg erro
+  forms ??

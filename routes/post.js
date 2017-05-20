@@ -10,10 +10,66 @@
 // );
 var db = require('../db');
 exports.createPost = function(req, res) {
-  res.status(200);
-  res.end();
+
+  var idUser = req.body.id;
+  var desPost = req.body.post;
+  db.serialize(function() {
+    db.run("insert into posts (idUser, datPost,desPost) values($idUser,$datPost, $desPost)", {
+      $idUser: idUser,
+      $datPost: Date.now(),
+      $desPost: desPost
+    }, function(err, data) {
+      if (err) {
+        res.status(500);
+        res.json({
+          "erro": err,
+          "message": err.message,
+          "stack": err.stack,
+        });
+      } else {
+        res.status(202);
+        res.json(data);
+      }
+    });
+  });
 };
 exports.getPost = function(req, res) {
-  res.status(200);
-  res.end();
+  var idUser = req.query.id;
+  var bolSelf = req.query.self;
+  db.serialize(function() {
+    if (bolSelf) {
+       db.all("select idUser, desPost, datPost from posts where idUser = ? order by datPost desc limit 50", idUser, function(err, data) {
+        if (err) {
+          res.status(500);
+          res.json({
+            "erro": err,
+            "message": err.message,
+            "stack": err.stack,
+          });
+        } else {
+          res.json(data);
+        }
+      });
+    } else {
+      var stmt = "select posts.idUser, posts.desPost, posts.datPost ";
+      stmt += "from posts, friends ";
+      stmt += "where posts.idUser = friends.idFriend and friends.idUser = $id ";
+      stmt += "order by datPost desc limit 50;";
+
+      db.all(stmt, {
+        $id: idUser
+      }, function(err, data) {
+        if (err) {
+          res.status(500);
+          res.json({
+            "erro": err,
+            "message": err.message,
+            "stack": err.stack,
+          });
+        } else {
+          res.json(data);
+        }
+      });
+    }
+  });
 };
