@@ -1,0 +1,26 @@
+{
+  "name": "vaga-backend-devjeffersonsilveira",
+  "version": "1.0.0",
+  "description": "Build an API to a social-media profile page that provides the following:",
+  "main": "server.js",
+  "dependencies": {
+    "express": "^4.15.3",
+    "sqlite3": "^3.1.8"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/devjeffersonsilveira/vaga-backend-devjeffersonsilveira.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/devjeffersonsilveira/vaga-backend-devjeffersonsilveira/issues"
+  },
+  "homepage": "https://github.com/devjeffersonsilveira/vaga-backend-devjeffersonsilveira#readme"
+}
