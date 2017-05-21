@@ -1,8 +1,8 @@
 TODO:
-  validações
+  validações 1/2
+  autorização (passaport???)
   try cacth
   teste automatizado
-  duplicar relação user friend (log efetivado)
-  numero status
-  tratar msg erro
   forms ??
+delete and update
+models : https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai

@@ -1,44 +1,59 @@
-// CREATE TABLE IF NOT EXISTS friend (
-//   idFriend INTEGER constraint pk_friend primary key,
-//   idUser INTEGER,
-//   nameFriend TEXT,
-//   CONSTRAINT fk_userFriend FOREIGN KEY (idUser) REFERENCES user(idUser)
-// );
 var db = require('../db');
+// cria amigo
 exports.createFriend = function(req, res) {
   var idUser = req.body.id;
   var idFriend = req.body.idFriend;
-  if (idUser) {
+  if (idUser && idFriend) {
     db.serialize(function() {
-      db.run("insert into friends(idUser, idFriend) values($id, $idFriend)", {
+      var stmt = "insert into friends(idUser, idFriend) values($id, $idFriend),($idFriend, $id); ";
+      db.run(stmt,  {
         $id: idUser,
         $idFriend: idFriend
       }, function(err, data) {
         if (err) {
-          res.status(500);
-          res.json(err);
-        } else {
-          res.status(202);
-          res.json(data);
+          res.send({
+            code: err.code,
+            errno: err.errno,
+            message: err.message,
+            stack: err.stack
+          });
         }
+        res.json({
+          message: "Amigo adicionado!",
+          data
+        });
       });
+    });
+  } else {
+    res.send({
+      message: "Sem id!"
     });
   }
 };
-exports.getFriend = function(req, res) {
+// retorna lista de amigos
+exports.getFriends = function(req, res) {
   var idUser = req.query.id;
   db.serialize(function() {
     if (idUser) {
-      db.all("Select * from friends where idUser = $id;", {
+      var stmt = "Select users.idUser, users.nameUser ";
+      stmt += " from users, friends ";
+      stmt += "where users.idUser = friends.idFriend and  friends.idUser = $id;";
+      db.all(stmt, {
         $id: idUser,
-      }, function(err, row) {
+      }, function(err, data) {
         if (err) {
-          res.status(500);
-          console.error(err);
-        } else {
-          res.json(row);
-          res.status(200);
+          res.send({
+            code: err.code,
+            errno: err.errno,
+            message: err.message,
+            stack: err.stack
+          });
         }
+        res.json(data);
+      });
+    } else {
+      res.send({
+        message: "Sem id!"
       });
     }
   });

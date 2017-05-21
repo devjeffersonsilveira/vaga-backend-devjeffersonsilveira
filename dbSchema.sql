@@ -3,8 +3,9 @@ CREATE TABLE IF NOT EXISTS users (
   nameUser TEXT
 );
 CREATE TABLE IF NOT EXISTS friends (
-  idFriend INTEGER constraint pk_friend primary key,
+  idFriend INTEGER,
   idUser INTEGER,
+  CONSTRAINT pk_friend primary key(idFriend, idUser),
   CONSTRAINT fk_userFriend FOREIGN KEY (idFriend) REFERENCES user(idUser),
   CONSTRAINT fk_userIdFriend FOREIGN KEY (idUser) REFERENCES user(idUser)
 );
