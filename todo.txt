@@ -1,8 +1,8 @@
 TODO:
   validações 1/2
   autorização (passaport???)
-  try cacth
+  tratar erros
   teste automatizado
   forms ??
 delete and update
-models : https://scotch.io/tutorials/test-a-node-restful-api-with-mocha-and-chai
+models

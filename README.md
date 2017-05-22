@@ -1,34 +1,52 @@
-API REST usando node.js
-foi a primeira vez que fiz uma web api rest, decidi usar node.js e sqlite por serem simples de aprender.
- as bibliotecas de node utilizadas foram express, sqlite3 e bodyParser.
- para rodar a API, é só executar na pasta do repositório
- npm install
-e depois,
- node server.js
- e a api já está pronta pra usar :D
+# API REST usando node.js
 
- os metodos disponiveis são:
- GET /user
-  irá retornar uma lista de todos os usuários
+Foi a primeira vez que fiz uma api rest, decidi usar node.js e sqlite por serem simples de aprender.<br>
+As bibliotecas de node utilizadas foram express, sqlite3 e bodyParser.<br>
+Para rodar a API, é só executar na pasta do repositório<br>
+`npm install`<br>
+E a api já está pronta pra usar :D<br>
+Para rodar, basta executar<br>
+`node server.js`<br>
 
-  GET /user/X
-   irá retornar o usuário de id X
+Os metodos disponíveis são:
 
-  POST /user
-  cria um novo usuário
+## GET /user
 
-  GET /friend?id=X
-   irá retornar uma lista de todos os amigos do usuário de id X
+- Irá retornar uma lista de todos os usuários.
 
-   POST /friend
-   cria uma nova relação de amizade
+## GET /user/X
 
+- Irá retornar o usuário de id X.
 
-GET /post?id=X
-retorna todos os posts dos amigos do usuario de id X
+## POST /user
 
-GET /post/X
-retorna os posts do usuário X
+- Cria um novo usuário. Duas informações são gravadas:
 
-POST /post
- cria um novo post
+  1. `id`: um identificador numérico único;
+  2. `name`: o nome do usuário;
+
+## GET /friend?id=X
+
+- Irá retornar uma lista de todos os amigos do usuário de id X.
+
+## POST /friend
+
+- Cria uma nova relação de amizade. Devem ser informados dois parâmetros:
+
+  1. `id`: Id do usuário;
+  2. `idFriend`: id de outro usuário.
+
+## GET /post?id=X
+
+- Retorna todos os posts dos amigos do usuario de id X
+
+## GET /post/X<br>
+
+- Retorna os posts do usuário X
+
+## POST /post<br>
+
+- Cria um novo post. os parâmetros são:
+
+  1. `id`: id do usuário que está postando;
+  2. `post`: o texto do post.

@@ -3,10 +3,10 @@ var db = require('../db');
 exports.createFriend = function(req, res) {
   var idUser = req.body.id;
   var idFriend = req.body.idFriend;
-  if (idUser && idFriend) {
+  if ((idUser && idFriend) && (idUser != idFriend)) {
     db.serialize(function() {
       var stmt = "insert into friends(idUser, idFriend) values($id, $idFriend),($idFriend, $id); ";
-      db.run(stmt,  {
+      db.run(stmt, {
         $id: idUser,
         $idFriend: idFriend
       }, function(err, data) {
@@ -26,7 +26,7 @@ exports.createFriend = function(req, res) {
     });
   } else {
     res.send({
-      message: "Sem id!"
+      message: "Sem id's ou id's iguais!"
     });
   }
 };
