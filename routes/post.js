@@ -24,7 +24,7 @@ exports.createPost = function(req, res) {
           data
         });
       });
-    }else {
+    } else {
       res.send({
         message: "Sem id!"
       });
@@ -52,6 +52,7 @@ exports.getPosts = function(req, res) {
             message: err.message,
             stack: err.stack
           });
+          return;
         }
         res.json(data);
       });
@@ -77,6 +78,7 @@ exports.getPost = function(req, res) {
             message: err.message,
             stack: err.stack
           });
+          return;
         }
         res.json(data);
       });

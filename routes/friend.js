@@ -17,6 +17,7 @@ exports.createFriend = function(req, res) {
             message: err.message,
             stack: err.stack
           });
+          return;
         }
         res.json({
           message: "Amigo adicionado!",
@@ -48,6 +49,7 @@ exports.getFriends = function(req, res) {
             message: err.message,
             stack: err.stack
           });
+          return;
         }
         res.json(data);
       });

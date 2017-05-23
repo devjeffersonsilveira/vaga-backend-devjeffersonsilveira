@@ -15,6 +15,7 @@ exports.createUser = function(req, res) {
             message: err.message,
             stack: err.stack
           });
+          return;
         }
         res.json({
           message: "Usuário adicionado!",
@@ -22,8 +23,10 @@ exports.createUser = function(req, res) {
         });
       });
     });
-  }else{
-    res.send({message: "Sem id!"});
+  } else {
+    res.send({
+      message: "Sem id!"
+    });
   }
 };
 // retorna lista de usuarios
@@ -37,6 +40,7 @@ exports.getUsers = function(req, res) {
           message: err.message,
           stack: err.stack
         });
+        return;
       }
       res.json(data);
     });
@@ -58,11 +62,14 @@ exports.getUser = function(req, res) {
             message: err.message,
             stack: err.stack
           });
+          return;
         }
         res.json(data);
       });
-    }else{
-      res.send({message: "Sem id!"});
+    } else {
+      res.send({
+        message: "Sem id!"
+      });
     }
   });
 };
